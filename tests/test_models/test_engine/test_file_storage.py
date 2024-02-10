@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ FileStorage UnitTest Module"""
-import json
 from models.engine.file_storage import FileStorage
 from models import storage
 import unittest
