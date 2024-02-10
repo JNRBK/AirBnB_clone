@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Module of BaseModel to define BaseModel class"""
 from datetime import datetime
 from models import storage
 import uuid
