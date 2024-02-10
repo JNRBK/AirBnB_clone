@@ -1,8 +1,6 @@
 # AirBnB_Clone  <sub>The  Console</sub>
 
-
-
-`by`
+``by``
 
 * Rafeek Beshay
 * Yara Nazih
