@@ -8,17 +8,21 @@ import unittest
 class TestPlace(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        """ Creating objects to be tested. """
         cls.new_object = Place()
 
     @classmethod
     def tearDownClass(cls):
+        """ Deleting objects at the end of the test"""
         del cls.new_object
 
     def test_init(self):
+        """ Testing the object created. """
         self.assertIsInstance(self.new_object, Place)
         self.assertIsInstance(self.new_object, BaseModel)
 
     def test_type(self):
+        """ Testing the type of the class attributes."""
         self.assertIsInstance(self.new_object.city_id, str)
         self.assertIsInstance(self.new_object.user_id, str)
         self.assertIsInstance(self.new_object.name, str)
@@ -35,6 +39,7 @@ class TestPlace(unittest.TestCase):
         self.assertIsInstance(self.new_object.amenity_ids, list)
 
     def test_EmptyOrNot(self):
+        """ Testing whether the class attribute is empty/exists or not. """
         self.assertFalse(self.new_object.city_id)
         self.assertFalse(self.new_object.user_id)
         self.assertFalse(self.new_object.name)
