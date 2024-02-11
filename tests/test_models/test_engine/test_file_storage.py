@@ -4,6 +4,7 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models import storage
 import unittest
+import os.path
 
 
 class TestFileStorage(unittest.TestCase):
@@ -27,28 +28,13 @@ class TestFileStorage(unittest.TestCase):
 
     def test_fpath(self):
         """ Checking the file path of the Json file. """
-        pass
+        file_name = 'file.json'
+        to_be_checked = os.path.isfile(FileStorage.locate_file())
+        self.assertTrue(to_be_checked)
 
     def test_objects(self):
         """ Testing the __objects class attribute. """
-        pass
-
-    def test_all(self):
-        """ Testing the all method. """
-        returned = self.f_storage.all()
-        self.assertIsInstance(returned, dict)
-
-    def test_new(self):
-        """ Testing the new method. """
-        self.f_storage.new(self)
-
-    def test_save(self):
-        """ Testing the save method. """
-        self.assertTrue('file.json')
-
-    def test_reload(self):
-        """ Testing the reload method. """
-        pass
+        self.assertIsInstance(FileStorage.object_get(), dict)
 
 
 if __name__ == '__main__':

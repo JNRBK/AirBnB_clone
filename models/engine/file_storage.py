@@ -52,3 +52,13 @@ class FileStorage():
             pass
         except json.decoder.JSONDecodeError:
             pass
+
+    @classmethod
+    def locate_file(cls):
+        """ Getting the file path from outside the class. """
+        return cls.__file_path
+
+    @classmethod
+    def object_get(cls):
+        """ Accessing the objects from outside the class. """
+        return cls.__objects
