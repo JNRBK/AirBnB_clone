@@ -6,6 +6,8 @@ import unittest
 
 
 class TestReview(unittest.TestCase):
+    """ Unittest Checking class Review """
+
     @classmethod
     def setUpClass(cls):
         """ Creating objects to be tested. """

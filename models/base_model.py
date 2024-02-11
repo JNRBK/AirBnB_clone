@@ -6,9 +6,8 @@ import uuid
 
 
 class BaseModel():
-    """
-    The BaseModel Class
-    """
+    """ The BaseModel Class """
+
     def __init__(self, *args, **kwargs):
         """ Initiation of objects. """
         if kwargs:

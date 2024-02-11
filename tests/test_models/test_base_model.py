@@ -6,6 +6,8 @@ import unittest
 
 
 class TestBaseModel(unittest.TestCase):
+    """ Unittest Checking class BaseModel """
+
     @classmethod
     def setUpClass(cls):
         """ Creating objects to be tested. """

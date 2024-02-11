@@ -6,6 +6,8 @@ import unittest
 
 
 class TestPlace(unittest.TestCase):
+    """ Unittest Checking class Place """
+
     @classmethod
     def setUpClass(cls):
         """ Creating objects to be tested. """

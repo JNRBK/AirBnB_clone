@@ -6,7 +6,8 @@ import unittest
 
 
 class TestUser(unittest.TestCase):
-    """ Testing User Class. """
+    """ Unittest Checking class User """
+
     @classmethod
     def setUpClass(cls):
         """ Creating objects to be tested. """

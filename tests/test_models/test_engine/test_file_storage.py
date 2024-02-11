@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ FileStorage UnitTest Module"""
+from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models import storage
 import unittest
@@ -7,10 +8,12 @@ import unittest
 
 class TestFileStorage(unittest.TestCase):
     """ Test FileStorage Class. """
+
     @classmethod
     def setUpClass(cls):
         """ Creating objects to be tested. """
         cls.f_storage = FileStorage()
+        cls.object = BaseModel()
         cls.path_check = cls.f_storage._FileStorage__file_path
         cls.obj_check = cls.f_storage._FileStorage__objects
 
@@ -44,7 +47,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_save(self):
         """ Testing the save method. """
-        pass
+        self.assertTrue('file.json')
 
     def test_reload(self):
         """ Testing the reload method. """

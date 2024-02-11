@@ -6,6 +6,8 @@ import unittest
 
 
 class TestAmenity(unittest.TestCase):
+    """ Unittest Checking class Amenity """
+
     @classmethod
     def setUpClass(cls):
         """ Creating objects to be tested. """
