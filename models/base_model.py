@@ -16,9 +16,11 @@ class BaseModel():
                     continue
                 else:
                     setattr(self, key, value)
-                    if key == 'created_at' or key == 'updated_at':
+                    if key == 'created_at':
                         self.created_at = datetime.fromisoformat(value)
+                    if key == 'updated_at':
                         self.updated_at = datetime.fromisoformat(value)
+
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
