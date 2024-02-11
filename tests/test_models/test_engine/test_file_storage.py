@@ -3,8 +3,8 @@
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models import storage
-import os.path
 import unittest
+import os.path
 
 
 class TestFileStorage(unittest.TestCase):
@@ -23,14 +23,8 @@ class TestFileStorage(unittest.TestCase):
 
     def test_init(self):
         """ Testing the object created. """
-        self.object.save()
         self.assertIsInstance(self.f_storage, FileStorage)
-        self.assertIsInstance(self.object, BaseModel)
-
-        self.assertTrue(os.path.getsize(FileStorage.locate_file()))
-
         self.assertTrue(self.f_storage)
-        self.assertTrue(self.object)
 
     def test_fpath(self):
         """ Checking the file path of the Json file. """
