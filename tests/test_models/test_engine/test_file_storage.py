@@ -36,6 +36,10 @@ class TestFileStorage(unittest.TestCase):
         """ Testing the __objects class attribute. """
         self.assertIsInstance(FileStorage.object_get(), dict)
 
+    def test_all(self):
+        """ Testing the all() method attribute. """
+        self.assertIsInstance(self.f_storage.all(), dict)
+
 
 if __name__ == '__main__':
     unittest.main()
