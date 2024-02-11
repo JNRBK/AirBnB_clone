@@ -29,9 +29,11 @@ class TestBaseModel(unittest.TestCase):
         """ Testing the object created. """
         self.assertIsInstance(self.object, BaseModel)
         self.assertNotIn('__class__', self.object.__dict__)
+        self.assertNotIn("Author's Name", self.object.__dict__)
 
         self.assertIsInstance(self.object2, BaseModel)
         self.assertNotIn('__class__', self.object2.__dict__)
+        self.assertIn("Author's Name", self.object2.__dict__)
 
     def test_id(self):
         """ Testing the object id. """
