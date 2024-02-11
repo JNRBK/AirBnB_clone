@@ -64,8 +64,8 @@ class HBNBCommand(cmd.Cmd):
             with open('file.json') as file:
                 json_to_dict = json.load(file)
                 checking_id = False
-                for value in json_to_dict.values():
-                    if id_to_look4 == value['id']:
+                for key, value in json_to_dict.items():
+                    if id_to_look4 == value['id'] and class_name in key:
                         class_name = value['__class__']
                         instance = globals()[class_name](**value)
                         checking_id = True
