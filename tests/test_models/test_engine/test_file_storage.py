@@ -14,7 +14,6 @@ class TestFileStorage(unittest.TestCase):
     def setUpClass(cls):
         """ Creating objects to be tested. """
         cls.f_storage = FileStorage()
-        cls.object = BaseModel()
 
     @classmethod
     def tearDownClass(cls):
