@@ -77,7 +77,7 @@ class TestBaseModel(unittest.TestCase):
         """ Testing the string representation. """
         class_name = self.object.__class__.__name__
         output = f"[{class_name}] ({self.object.id}) {self.object.__dict__}"
-        self.assertEqual(str(self.object), output)
+        self.assertEqual(self.object.__str__(), output)
 
 
 if __name__ == '__main__':

@@ -16,18 +16,18 @@ class FileStorage():
 
     def all(self):
         """ Returns the dictionary __objects. """
-        return FileStorage.__objects
+        return self.__objects
 
     def new(self, obj):
         """ Sets in __objects the obj with key "obj.class name.id". """
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        FileStorage.__objects[key] = obj
+        self.__objects[key] = obj
 
     def save(self):
         """ Serializes __objects to the JSON file. """
         obj_dict_to_json = {}
-        with open(FileStorage.__file_path, 'w') as file:
-            for key, value in FileStorage.__objects.items():
+        with open(self.__file_path, 'w') as file:
+            for key, value in self.__objects.items():
                 obj_dict_to_json[key] = value.to_dict()
             json.dump(obj_dict_to_json, file)
 
@@ -42,7 +42,7 @@ class FileStorage():
         from models.user import User
 
         try:
-            with open(FileStorage.__file_path, 'r') as file:
+            with open(self.__file_path, 'r') as file:
                 loaded = json.load(file)
                 for value in loaded.values():
                     try:

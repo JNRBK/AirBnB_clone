@@ -28,6 +28,7 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, args):
         """ Quit command to exit the program. """
         return True
+
     do_EOF = do_quit
 
     def emptyline(self):
@@ -141,6 +142,79 @@ class HBNBCommand(cmd.Cmd):
                 instance = objects_saved[key_to_find]
                 setattr(instance, argv[2], argv[3].strip('"'))
                 instance.save()
+
+    def do_count(self, args):
+        """ Retrieve the number of instances of a class. """
+        argv = args.split()
+        objects_read = storage.all()
+        if not args:
+            print("** class name missing **")
+        elif argv[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+        else:
+            count = 0
+            for key in objects_read:
+                if key.split('.')[0] == args:
+                    count += 1
+            print(count)
+
+    def default(self, args):
+        """ Edit the default behavior of the CMD module. """
+        if '.' in args:
+            argv = args.split('.')
+            classname = argv[0]
+
+            try:
+                temp = argv[1].split('(')
+                method = temp[0]
+
+                if method == 'all':
+                    HBNBCommand.do_all(self, classname)
+                    return
+
+                elif method == 'count':
+                    HBNBCommand.do_count(self, classname)
+                    return
+
+                else:
+                    argv[1] = temp[0]
+                    temp2 = temp[1].split('")')
+                    temp3 = temp2[0].split('"')
+                    argv.append(temp3[1])
+                    id_to_check = argv[2]
+                    parameters = f"{classname} {id_to_check}"
+
+                    if method == 'show':
+                        HBNBCommand.do_show(self, parameters)
+                        return
+
+                    if method == 'destroy':
+                        HBNBCommand.do_destroy(self, parameters)
+                        return
+
+                    if method == 'update':
+                        if len(temp3) > 6:
+                            temp4 = temp3[2].split("'")
+                            argv.append(temp4[1])
+                            argv.append(temp3[3])
+
+                        else:
+                            temp4 = temp3[4].split(", ")
+                            temp5 = temp4[1].split(")")
+                            argv.append(temp3[3])
+                            argv.append(temp5[0])
+
+                        attribute = argv[3]
+                        value = argv[4]
+                        new_parameters = f"{parameters} {attribute} {value}"
+                        HBNBCommand.do_update(self, new_parameters)
+                        return
+
+            except Exception:
+                print(f"*** Unknown syntax: {args}")
+        else:
+            print(f"*** Unknown syntax: {args}")
+            return
 
 
 if __name__ == '__main__':
