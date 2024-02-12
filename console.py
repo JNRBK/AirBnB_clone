@@ -47,7 +47,7 @@ class HBNBCommand(cmd.Cmd):
             print(new.id)
 
     def do_show(self, args):
-        """ Prints the string representation of an instance. """
+        """ Deletes an instance & save the change into the JSON file. """
         argv = []
         argv = args.split()
         if not argv:
@@ -60,18 +60,15 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
 
         elif len(argv) == 2 and argv[0] in HBNBCommand.classes:
-            class_name, id_to_look4 = map(str, args.split(" "))
-            with open('file.json') as file:
-                json_to_dict = json.load(file)
-                checking_id = False
-                for key, value in json_to_dict.items():
-                    if id_to_look4 == value['id'] and class_name in key:
-                        class_name = value['__class__']
-                        instance = globals()[class_name](**value)
-                        checking_id = True
-                        print(instance)
-                if not checking_id:
-                    print("** no instance found **")
+            class_name, id2look4 = map(str, args.split(" "))
+            key = "{}.{}".format(class_name, id2look4)
+
+            objects_saved = storage.all()
+
+            if key in objects_saved:
+                print(objects_saved[key])
+            else:
+                print("** no instance found **")
 
     def do_destroy(self, args):
         """ Deletes an instance & save the change into the JSON file. """
@@ -193,16 +190,21 @@ class HBNBCommand(cmd.Cmd):
                         return
 
                     if method == 'update':
-                        if len(temp3) > 6:
-                            temp4 = temp3[2].split("'")
-                            argv.append(temp4[1])
+                        if len(temp3) == 5:
                             argv.append(temp3[3])
-
-                        else:
                             temp4 = temp3[4].split(", ")
                             temp5 = temp4[1].split(")")
-                            argv.append(temp3[3])
                             argv.append(temp5[0])
+
+                        elif len(temp3) == 6:
+                            argv.append(temp3[3])
+                            argv.append(temp3[5])
+
+                        if len(temp3) > 6:
+                            temp4 = temp3[2].split(", {'")
+                            temp5 = temp4[1].split("': ")
+                            argv.append(temp5[0])
+                            argv.append(temp3[3])
 
                         attribute = argv[3]
                         value = argv[4]
@@ -212,6 +214,8 @@ class HBNBCommand(cmd.Cmd):
 
             except Exception:
                 print(f"*** Unknown syntax: {args}")
+                return
+
         else:
             print(f"*** Unknown syntax: {args}")
             return
