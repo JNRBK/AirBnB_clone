@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ BaseModel UnitTest Module"""
-from datetime import datetime
+from datetime import datetime, timedelta
 from models.base_model import BaseModel
 import unittest
 
@@ -68,6 +68,12 @@ class TestBaseModel(unittest.TestCase):
         self.object2.save()
         self.assertIsInstance(self.object2.updated_at, datetime)
         self.assertNotEqual(self.object2.created_at, self.object2.updated_at)
+
+        t1 = self.object2.updated_at
+        t2 = datetime.utcnow()
+        time_difference = abs(t1 - t2)
+        delta_seconds = time_difference.total_seconds()
+        self.assertAlmostEqual(t1, t2, delta=timedelta(seconds=delta_seconds))
 
     def test_to_dict(self):
         """ Testing the to_dict() method. """

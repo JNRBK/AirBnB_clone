@@ -190,18 +190,28 @@ class HBNBCommand(cmd.Cmd):
                         return
 
                     if method == 'update':
-                        if len(temp3) == 5:
+                        if len(temp3) == 5 and "{" not in args:
                             argv.append(temp3[3])
                             temp4 = temp3[4].split(", ")
                             temp5 = temp4[1].split(")")
                             argv.append(temp5[0])
 
-                        elif len(temp3) == 6:
+                        elif len(temp3) == 6 and "{" not in args:
                             argv.append(temp3[3])
                             argv.append(temp3[5])
 
-                        if len(temp3) > 6:
+                        elif len(temp3) > 8:
+                            argv.append(temp3[3])
+                            argv.append(temp3[5])
+
+                        elif len(temp3) > 6 and ", {'" in args:
                             temp4 = temp3[2].split(", {'")
+                            temp5 = temp4[1].split("': ")
+                            argv.append(temp5[0])
+                            argv.append(temp3[3])
+
+                        elif len(temp3) > 6 and ", { '" in args:
+                            temp4 = temp3[2].split(", { '")
                             temp5 = temp4[1].split("': ")
                             argv.append(temp5[0])
                             argv.append(temp3[3])
